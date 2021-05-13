@@ -2,6 +2,7 @@ import express from 'express';
 import exceljs from 'exceljs';
 import path from 'path';
 import axios from 'axios';
+import 'dotenv/config';
 
 const app = express();
 
@@ -30,10 +31,10 @@ app.get('/', async (request, response) => {
   const workbook = new exceljs.Workbook();
   const worksheet = workbook.addWorksheet('Data');
 
-  const { data } = await axios.get<ResponseData[]>(process.env.REACT_APP_API_URL || '', {
+  const { data } = await axios.get<ResponseData[]>(process.env.APP_API_URL || '', {
     auth: {
-      username: process.env.REACT_APP_API_USER || '',
-      password: process.env.REACT_APP_API_PASSWORD || '',
+      username: process.env.API_USER || '',
+      password: process.env.API_PASSWORD || '',
     }
   });
 
